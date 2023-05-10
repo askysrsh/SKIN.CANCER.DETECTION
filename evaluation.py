@@ -33,3 +33,10 @@ def prepare_for_testing(ds, cache=True, shuffle_buffer_size=1000):
 
 test_ds = test_ds.map(process_path)
 test_ds = prepare_for_testing(test_ds, cache="test-cached-data")
+# load the weights with the least loss
+m.load_weights("benign-vs-malignant_64_rmsprop_0.399.h5")
+print("Evaluating the model...")
+loss, accuracy = m.evaluate(X_test, y_test, verbose=0)
+print("Loss:", loss, "  Accuracy:", accuracy)
+
+
